@@ -71,7 +71,7 @@
         </div>
     </div>
 
-    <!-- <form-drawer ref="formDrawerRef" title="修改密码" destroyOnClose @submit="onSubmit">
+    <Drawer ref="formDrawerRef" title="修改密码" destroyOnClose @submit="onSubmit">
         <el-form ref="formRef" :rules="rules" :model="form" label-width="80px" size="small">
             <el-form-item prop="oldpassword" label="旧密码">
                 <el-input v-model="form.oldpassword" placeholder="请输入旧密码"></el-input>
@@ -83,45 +83,46 @@
                 <el-input type="password" v-model="form.repassword" placeholder="请输入确认密码" show-password></el-input>
             </el-form-item>
         </el-form>
-    </form-drawer> -->
+    </Drawer>
 </template>
 <script setup>
-// import FormDrawer from '~/components/FormDrawer.vue'
-// import { useFullscreen } from '@vueuse/core'
-// import { useRepassword,useLogout } from "~/composables/useManager"
+// 侧面板
+import Drawer from '../../components/Drawer.vue';
+import { useFullscreen } from '@vueuse/core'
+import { useRepassword,useLogout } from "@/composables/useManager"
 
-// const {
-//     // 是否全屏状态
-//     isFullscreen,
-//     // 切换全屏
-//     toggle
-// } = useFullscreen()
+const {
+    // 是否全屏状态
+    isFullscreen,
+    // 切换全屏
+    toggle
+} = useFullscreen()
 
-// const {
-//     formDrawerRef,
-//     form,
-//     rules,
-//     formRef,
-//     onSubmit,
-//     openRePasswordForm
-// } = useRepassword()
+const {
+    formDrawerRef,
+    form,
+    rules,
+    formRef,
+    onSubmit,
+    openRePasswordForm
+} = useRepassword()
 
-// const {
-//     handleLogout
-// } = useLogout()
+const {
+    handleLogout
+} = useLogout()
 
-// const handleCommand = (c) => {
-//     switch (c) {
-//         case "logout":
-//             handleLogout()
-//             break;
-//         case "rePassword":
-//             openRePasswordForm()
-//             break;
-//     }
-// }
+const handleCommand = (c) => {
+    switch (c) {
+        case "logout":
+            handleLogout()
+            break;
+        case "rePassword":
+            openRePasswordForm()
+            break;
+    }
+}
 
-// // 刷新
+// 刷新
 // const handleRefresh = () => location.reload()
 </script>
 

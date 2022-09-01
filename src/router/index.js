@@ -1,12 +1,19 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
+import layout from '@/layouts/index.vue'
+// modules
+// // 组A
+// import A from './modules/A'
+// import AA from './modules/AA'
+// // 组B
+// import B from './modules/B'
 
 // 默认路由，所有用户共享
-const routes = [
+export const publicRoutes = [
   {
-    path: '/',
-    name: 'admin',
-    component: () => import('@/layouts/index')
+    path: '/', // 注意：带有路径“/”的记录中的组件“默认”是一个不返回 Promise 的函数
+    component: layout
   },
+  // 登录
   {
     path: '/login',
     name: 'login',
@@ -19,152 +26,123 @@ const routes = [
   {
     path: '/:pathMatch(.*)*',
     name: 'notFound',
-    component: () => import('@/views/not-found/index')
+    component: () => import('@/views/notFound/index')
   }
 ]
 
 // 动态路由（私有路由），用于匹配菜单动态添加路由
-const asyncRoutes = [
+// export const privateRoutes = [A, AA, B]
+
+// 动态路由（私有路由），用于匹配菜单动态添加路由
+export const privateRoutes = [
   // 概览
   {
     path: '/general',
     name: 'general',
-    component: () => import('@/views/overview/index'),
+    component: layout,
+    redirect: '/general/overview',
     meta: {
-      locale: 'menu.general',
-      requiresAuth: true,
-      icon: 'icon-dashboard',
+      title: '概览',
+      icon: 'help',
       order: 0
-    }
-    // redirect: '/general/overview',
-    // children: [
-    //   {
-    //     path: 'overview',
-    //     name: 'Overview',
-    //     component: () => import('@/views/overview/index'),
-    //     meta: {
-    //       locale: 'menu.user.overview',
-    //       requiresAuth: true,
-    //       roles: ['*']
-    //     }
-    //   }
-    // ]
+    },
+    children: [
+      {
+        path: '/general/overview',
+        name: 'overview',
+        component: () => import('@/views/overview/index.vue'),
+        meta: {
+          title: '用户总览',
+          icon: 'help'
+        }
+      }
+    ]
   },
   // 用户
   {
     path: '/user',
     name: 'user',
-    component: null,
+    component: layout,
+    redirect: '/user/useraction',
     meta: {
-      locale: 'menu.user',
       requiresAuth: true,
-      icon: 'icon-user',
+      title: '用户',
+      icon: 'user',
       order: 1
-      // hideChildrenInMenu: true,
-    }
-    // children: [
-    //   {
-    //     path: 'useraction',
-    //     name: 'Useraction',
-    //     component: () => import('@/views/useraction/index.vue'),
-    //     meta: {
-    //       locale: 'menu.useraction',
-    //       requiresAuth: true,
-    //       roles: ['*']
-    //     }
-    //   },
-    // ]
+    },
+    children: [
+      {
+        path: '/user/useraction',
+        name: 'useraction',
+        component: () => import('@/views/useraction/index.vue'),
+        meta: {
+          title: '用户细查',
+          icon: 'Search'
+        }
+      }
+    ]
   },
   // 错误
   {
     path: '/error',
     name: 'error',
-    component: null,
+    component: layout,
     meta: {
-      locale: 'menu.error',
-      requiresAuth: true,
-      icon: 'icon-close-circle',
+      title: '错误',
+      icon: 'circle-close',
       order: 2
-    }
-    // children: [
-    //   {
-    //     path: 'issues',
-    //     name: 'Issues',
-    //     component: () => import('@/views/error/issues/index.vue'),
-    //     meta: {
-    //       locale: 'menu.error.issues',
-    //       requiresAuth: true,
-    //       roles: ['*']
-    //     }
-    //   },
-    //   {
-    //     path: 'issue-details/:issueid', // 通过issueid返回对应的数据 再渲染到页面
-    //     name: 'IssueDetails',
-    //     component: () => import('@/views/error/issue-details/index.vue'),
-    //     meta: {
-    //       locale: 'menu.error.issueDetails',
-    //       requiresAuth: true,
-    //       roles: ['*'],
-    //       hideInMenu: true
-    //     }
-    //   }
-    // ]
+    },
+    children: [
+      {
+        path: '/error/issues',
+        name: 'Issues',
+        component: () => import('@/views/error/issues.vue'),
+        meta: {
+          title: '异常数据',
+          icon: 'bell'
+        }
+      },
+      {
+        path: '/error/issue-details/:issueid', // 通过issueid返回对应的数据 再渲染到页面
+        name: 'IssueDetails',
+        component: () => import('@/views/error/issue-details.vue')
+      }
+    ]
   },
   // 性能
   {
     path: '/performance',
     name: 'performance',
-    component: null,
+    component: () => import('@/layouts/index.vue'),
     meta: {
-      locale: 'menu.performance',
-      requiresAuth: true,
-      icon: 'icon-thunderbolt',
+      title: '性能',
+      icon: 'Compass',
       order: 3
-    }
-    // children: [
-    //   {
-    //     path: 'page',
-    //     name: 'Page',
-    //     component: () => import('@/views/performance/page/index.vue'),
-    //     meta: {
-    //       locale: 'menu.performance.page',
-    //       requiresAuth: true,
-    //       roles: ['*']
-    //     }
-    //   },
-    //   {
-    //     path: 'pageinfo/:fdURL',
-    //     name: 'PageInfo',
-    //     component: () => import('@/views/performance/page/page-info.vue'),
-    //     meta: {
-    //       locale: 'menu.performance.pageInfo',
-    //       requiresAuth: true,
-    //       roles: ['*'],
-    //       hideInMenu: true
-    //     }
-    //   },
-    //   {
-    //     path: 'api',
-    //     name: 'API',
-    //     component: () => import('@/views/performance/api/index.vue'),
-    //     meta: {
-    //       locale: 'menu.performance.api',
-    //       requiresAuth: true,
-    //       roles: ['*']
-    //     }
-    //   },
-    //   {
-    //     path: 'apiinfo/:apiurl',
-    //     name: 'APIInfo',
-    //     component: () => import('@/views/performance/api/api-info.vue'),
-    //     meta: {
-    //       locale: 'menu.performance.apiInfo',
-    //       requiresAuth: true,
-    //       roles: ['*'],
-    //       hideInMenu: true
-    //     }
-    //   }
-    // ]
+    },
+    children: [
+      {
+        path: '/performance/page',
+        name: 'Page',
+        component: () => import('@/views/performance/page.vue'),
+        meta: { title: '页面性能', icon: 'Monitor' }
+      },
+      {
+        path: '/performance/pageinfo/:fdURL',
+        name: 'PageInfo',
+        component: () => import('@/views/performance/page-info.vue')
+      },
+      {
+        path: '/performance/api',
+        name: 'API',
+        component: () => import('@/views/performance/api.vue'),
+        meta: { title: '接口性能', icon: 'Pointer' }
+      },
+      {
+        path: '/performance/apiinfo/:apiurl',
+        name: 'APIInfo',
+        component: () => import('@/views/performance/api-info.vue')
+      }
+    ]
   }
 ]
 
@@ -174,16 +152,14 @@ export function addRoutes(menus) {
   let hasNewRoutes = false
   const findAndAddRoutesByMenus = arr => {
     arr.forEach(e => {
-      console.log('e', e)
-      let item = asyncRoutes.find(o => o.path == e.frontpath)
-      console.log('item', item)
-      // if (item && !router.hasRoute(item.path)) {
-      //   router.addRoute('admin', item)
-      //   hasNewRoutes = true
-      // }
-      // if (e.child && e.child.length > 0) {
-      //   findAndAddRoutesByMenus(e.child)
-      // }
+      let item = privateRoutes.find(o => o.path == e.frontpath)
+      if (item && !router.hasRoute(item.path)) {
+        router.addRoute('admin', item)
+        hasNewRoutes = true
+      }
+      if (e.child && e.child.length > 0) {
+        findAndAddRoutesByMenus(e.child)
+      }
     })
   }
   findAndAddRoutesByMenus(menus)
@@ -192,7 +168,7 @@ export function addRoutes(menus) {
 
 const router = createRouter({
   history: createWebHashHistory(),
-  routes
+  routes: publicRoutes
 })
 
 export default router

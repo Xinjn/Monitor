@@ -7,7 +7,7 @@
             <el-aside :width="$store.getters.asideWidth">
                 <f-menu />
             </el-aside>
-            <!-- <el-main>
+            <el-main>
                 <f-tag-list/>
                 <router-view v-slot="{ Component }">
                     <transition name="fade">
@@ -16,7 +16,7 @@
                         </keep-alive>
                     </transition>
                 </router-view>
-            </el-main> -->
+            </el-main>
         </el-container>
     </el-container>
 </template>
@@ -24,6 +24,7 @@
 <script setup>
 import FHeader from './components/FHeader.vue';
 import FMenu from './components/FMenu.vue';
+// import Sidebar from './components/Sidebar/index.vue'
 // import FTagList from './components/FTagList.vue';
 </script>
 

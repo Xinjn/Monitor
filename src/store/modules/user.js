@@ -1,8 +1,9 @@
 // /* 用于处理所有和 用户相关 的内容 */
 import { setItem, getItem, removeAllItem } from '@/utils/storage'
 import { TOKEN } from '@/constant'
-// import router, { resetRouter } from '@/router'
-import { login, getinfo, getUserMenu } from '@/api/user'
+import router from '@/router'
+import { login, getUserInfo, getUserMenu } from '@/api/user'
+import { toast } from '@/composables/util'
 
 export default {
   namespaced: true,
@@ -19,9 +20,9 @@ export default {
       state.token = token
       setItem(TOKEN, token)
     },
-    // setUserInfo(state, userInfo) {
-    //   state.userInfo = userInfo
-    // }
+    setUserInfo(state, userInfo) {
+      state.userInfo = userInfo
+    },
     setUserMenu(state, menus) {
       state.menus = menus
     },
@@ -35,16 +36,18 @@ export default {
     // 登录
     login(context, userInfo) {
       const { username, password } = userInfo
-      console.log('userInfo', userInfo)
       return new Promise((resolve, reject) => {
         login({
           username,
           password: password
         })
           .then(data => {
-            // 设置token
-            this.commit('user/setToken', data.token)
-            resolve(data)
+            if (data?.token) {
+              // 设置token
+              this.commit('user/setToken', data.token)
+              resolve(data)
+            }
+            reject('账号或者密码错误')
           })
           .catch(err => {
             reject(err)
@@ -64,20 +67,21 @@ export default {
             reject(err)
           })
       })
+    },
+    // 获取用户信息
+    async getUserInfo(context) {
+      const res = await getUserInfo()
+      this.commit('user/setUserInfo', res)
+      return res
+    },
+
+    // 退出登录
+    logout(context) {
+      // resetRouter()
+      this.commit('user/setToken', '')
+      this.commit('user/setUserInfo', {})
+      removeAllItem()
+      router.push('login')
     }
-    // // 获取用户信息
-    // async getUserInfo(context) {
-    //   const res = await getUserInfo()
-    //   this.commit('user/setUserInfo', res)
-    //   return res
-    // },
-    // // 退出登录
-    // logout(context) {
-    //   resetRouter()
-    //   this.commit('user/setToken', '')
-    //   this.commit('user/setUserInfo', {})
-    //   removeAllItem()
-    //   router.push('login')
-    // }
   }
 }

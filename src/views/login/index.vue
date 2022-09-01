@@ -104,7 +104,10 @@ const onSubmit = () => {
       .then(res=>{
         toast("登录成功")
         router.push("/")
-      }).finally(()=>{
+      }).catch(err=>{
+        toast(err,'error')
+      })
+      .finally(()=>{
         loading.value = false
       })
   })
