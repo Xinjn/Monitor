@@ -79,6 +79,11 @@ export const privateRoutes = [
           title: '用户细查',
           icon: 'Search'
         }
+      },
+      {
+        path: '/user/userDetail/:id',
+        name: 'UserDetail',
+        component: () => import('@/views/userDetail/index.vue')
       }
     ]
   },
@@ -96,16 +101,16 @@ export const privateRoutes = [
       {
         path: '/error/issues',
         name: 'Issues',
-        component: () => import('@/views/error/issues.vue'),
+        component: () => import('@/views/error/issues/index.vue'),
         meta: {
           title: '异常数据',
           icon: 'bell'
         }
       },
       {
-        path: '/error/issue-details/:issueid', // 通过issueid返回对应的数据 再渲染到页面
+        path: '/error/issuedetails/:issueid', // 通过issueid返回对应的数据 再渲染到页面
         name: 'IssueDetails',
-        component: () => import('@/views/error/issue-details.vue')
+        component: () => import('@/views/error/issuedetails/index.vue')
       }
     ]
   },

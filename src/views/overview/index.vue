@@ -26,7 +26,7 @@
 
         <!-- 异常数据总览 -->
         <div>
-          <!-- <ErrorOverview /> -->
+          <ErrorOverview />
         </div>
 
       </a-space>
@@ -38,7 +38,7 @@
     import PublicOpinion from './components/publicOpinion.vue';
     import ContentPublishRatio from './components/contentPublishRatio.vue';
     import DataChainGrowth from './components/dataChainGrowth.vue';
-    // import ErrorOverview from '../error/issues/components/error-overview.vue';
+    import ErrorOverview from '../error/issues/components/errorOverview.vue';
   </script>
   
   <style scoped lang="less">

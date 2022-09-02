@@ -12,6 +12,8 @@ import '@arco-design/web-vue/dist/arco.css'
 // import '@/styles/global.less'
 // 注册全局组件
 import globalComponents from '@/components/index.js'
+// 注册全局指令
+import directive from '@/directive'
 
 import App from '@/App.vue'
 import router from './router'
@@ -36,5 +38,6 @@ app.use(ArcoVueIcon)
 app.use(router)
 app.use(store)
 app.use(globalComponents)
+app.use(directive)
 
 app.mount('#app')
