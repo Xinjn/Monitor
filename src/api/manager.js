@@ -1,5 +1,6 @@
 import axios from '@/axios'
 import { queryParams } from '@/composables/util'
+
 export function login(username, password) {
   return axios.post('/admin/login', {
     username,
@@ -11,9 +12,9 @@ export function getinfo() {
   return axios.post('/admin/getinfo')
 }
 
-export function logout() {
-  return axios.post('/admin/logout')
-}
+// export function logout() {
+//   return axios.post('/admin/logout')
+// }
 
 export function updatepassword(data) {
   return axios.post('/admin/updatepassword', data)

@@ -1,5 +1,5 @@
 import { ref, reactive } from 'vue'
-import { logout, updatepassword } from '@/api/manager'
+import { logout, updatepassword } from '@/api/user'
 import { showModal, toast } from '@/composables/util'
 import { useRouter } from 'vue-router'
 import { useStore } from 'vuex'

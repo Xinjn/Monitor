@@ -11,7 +11,8 @@ import layout from '@/layouts/index.vue'
 export const publicRoutes = [
   {
     path: '/', // 注意：带有路径“/”的记录中的组件“默认”是一个不返回 Promise 的函数
-    component: layout
+    component: layout,
+    redirect: '/general/overview'
   },
   // 登录
   {
@@ -118,7 +119,7 @@ export const privateRoutes = [
   {
     path: '/performance',
     name: 'performance',
-    component: () => import('@/layouts/index.vue'),
+    component: layout, // 不能异步，必须同步
     meta: {
       title: '性能',
       icon: 'Compass',
@@ -128,24 +129,24 @@ export const privateRoutes = [
       {
         path: '/performance/page',
         name: 'Page',
-        component: () => import('@/views/performance/page.vue'),
+        component: () => import('@/views/performance/page/index.vue'),
         meta: { title: '页面性能', icon: 'Monitor' }
       },
       {
         path: '/performance/pageinfo/:fdURL',
         name: 'PageInfo',
-        component: () => import('@/views/performance/page-info.vue')
+        component: () => import('@/views/performance/page/pageInfo.vue')
       },
       {
         path: '/performance/api',
         name: 'API',
-        component: () => import('@/views/performance/api.vue'),
+        component: () => import('@/views/performance/api/index.vue'),
         meta: { title: '接口性能', icon: 'Pointer' }
       },
       {
-        path: '/performance/apiinfo/:apiurl',
+        path: '/performance/apiInfo/:apiurl',
         name: 'APIInfo',
-        component: () => import('@/views/performance/api-info.vue')
+        component: () => import('@/views/performance/api/apiInfo.vue')
       }
     ]
   }

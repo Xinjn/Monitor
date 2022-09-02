@@ -74,14 +74,13 @@ export default {
       this.commit('user/setUserInfo', res)
       return res
     },
-
     // 退出登录
     logout(context) {
       // resetRouter()
       this.commit('user/setToken', '')
       this.commit('user/setUserInfo', {})
       removeAllItem()
-      router.push('login')
+      router.push('/login')
     }
   }
 }

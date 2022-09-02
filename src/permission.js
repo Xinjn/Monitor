@@ -10,14 +10,6 @@ const whiteList = ['/login']
 let hasGetInfo = false
 
 router.beforeEach(async (to, from, next) => {
-  const token = getItem('token')
-
-  // 没有登录，强制跳转回登录页
-  if (!token && to.path !== '/login') {
-    toast('请先登录', 'error')
-    return next({ path: '/login' })
-  }
-
   // 如果用户登录了，自动获取用户信息，并存储在vuex当中
   // let hasNewRoutes = false
   // if (token && !hasGetInfo) {
@@ -27,6 +19,7 @@ router.beforeEach(async (to, from, next) => {
   //   hasNewRoutes = addRoutes(menus)
   // }
 
+  // 有 token
   if (store.getters.token) {
     // 防止重复登录
     if (to.path === '/login') {
@@ -53,10 +46,12 @@ router.beforeEach(async (to, from, next) => {
       next()
     }
   } else {
+    // 没有 token
     if (whiteList.indexOf(to.path) > -1) {
       next()
     } else {
-      next('login')
+      toast('请先登录', 'error')
+      next('/login')
     }
   }
 })
