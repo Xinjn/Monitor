@@ -38,15 +38,15 @@ router.beforeEach(async (to, from, next) => {
       if (!store.getters.hasUserInfo) {
         // 触发获取用户信息的 action,并获取用户当前权限
         const { permission } = await store.dispatch('user/getUserInfo')
-        console.log('用户权限', permission.menus)
+        // console.log('用户权限', permission.menus)
         // 处理用户权限，筛选出需要添加的权限（同时过滤二级隐藏路由，不进行菜单展示）
         const filterRoutes = await store.dispatch('permission/filterRoutes', permission.menus)
-        console.log('过滤路由', filterRoutes)
+        // console.log('过滤路由', filterRoutes)
         // 利用 addRoute 循环添加公共路由，数据格式为扁平
         filterRoutes.forEach(item => {
           router.addRoute(item)
         })
-        console.log('总路有', router.getRoutes())
+        // console.log('总路有', router.getRoutes())
         // 添加完动态路由之后，需要在进行一次主动跳转
         return next(to.path)
       }

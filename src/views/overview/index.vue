@@ -1,47 +1,45 @@
 <template>
     <div class="container">
-      <!-- <Breadcrumb :items="['menu.user', 'menu.user.overview']" /> -->
-      <el-back-top
-        target-container="#basic-demo"
-        :style="{ position: 'absolute' }"
-      />
-      <el-space direction="vertical" :size="12" fill>
-        <el-space direction="vertical" :size="16" fill>
-          <div class="space-unit">
-            <PublicOpinion />
-          </div>
-          <div>
-            <el-grid :cols="24" :col-gap="16" :row-gap="16">
-              <el-grid-item
-                :span="{ xs: 24, sm: 24, md: 24, lg: 24, xl: 24, xxl: 24 }"
-              >
-              2
-                <!-- <ContentPublishRatio /> -->
-              </el-grid-item>
-            </el-grid>
-          </div>
-          <div>
-            3
-            <!-- <DataChainGrowth /> -->
-          </div>
-          <div>
-            4
-            <!-- <ErrorOverview /> -->
-          </div>
-        </el-space>
-      </el-space>
+      <!-- 全局组件：面包屑 -->
+    <Breadcrumb :items="['用户', '用户概览']" />
+    <a-space direction="vertical" :size="12" fill>
+      <a-space direction="vertical" :size="16" fill>
+
+        <!-- 流量数据:PV/UV -->
+        <div class="space-unit">
+          <PublicOpinion />
+        </div>
+
+        <!-- 用户量统计 -->
+        <div>
+          <a-grid :cols="24" :col-gap="16" :row-gap="16">
+            <a-grid-item :span="{ xs: 24, sm: 24, md: 24, lg: 24, xl: 24, xxl: 24 }">
+              <ContentPublishRatio />
+            </a-grid-item>
+          </a-grid>
+        </div>
+
+        <!-- 趋势 -->
+        <div>
+          <DataChainGrowth />
+        </div>
+
+        <!-- 异常数据总览 -->
+        <div>
+          <!-- <ErrorOverview /> -->
+        </div>
+
+      </a-space>
+    </a-space>
     </div>
   </template>
   
   <script setup>
-      // import Breadcrumb from '@/components/breadcrumb/index.vue';
-    // import DataChainGrowth from './components/data-chain-growth.vue';
-    import PublicOpinion from './components/public-opinion.vue';
-    // import ContentPublishRatio from './components/content-publish-ratio.vue';
+    import PublicOpinion from './components/publicOpinion.vue';
+    import ContentPublishRatio from './components/contentPublishRatio.vue';
+    import DataChainGrowth from './components/dataChainGrowth.vue';
     // import ErrorOverview from '../error/issues/components/error-overview.vue';
   </script>
-  
-
   
   <style scoped lang="less">
     .container {

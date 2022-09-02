@@ -76,11 +76,11 @@ const routes = computed(() => {
      * 2. 去除重复路由：
      */
     const filterRoutes = filterRouters(router.getRoutes())
-    console.log('扁平路由转tree',filterRoutes);
+    // console.log('扁平路由转tree',filterRoutes);
     //   console.log('路由处理前：扁平结构', router.getRoutes())
     //   console.log('路由处理后：tree结构', filterRoutes)
     const result = generateMenus(filterRoutes)
-    console.log('最终路有',result);
+    // console.log('最终路有',result);
     // console.log('result',result);
     return result
 })

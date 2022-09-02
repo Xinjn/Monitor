@@ -1,10 +1,9 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
+import path from 'path'
+// 样式
 import WindiCSS from 'vite-plugin-windicss'
 
-import path from 'path'
-
-// https://vitejs.dev/config/
 export default defineConfig({
   resolve: {
     alias: {
@@ -17,12 +16,17 @@ export default defineConfig({
     assetsDir: 'assets'
   },
   // 反向代理
-  server: {
-    open: true,
-    fs: {
-      strict: true
+  devServer: {
+    // 配置反向代理
+    proxy: {
+      // 当地址中有/api的时候会触发代理机制
+      '/api': {
+        // 要代理的服务器地址  这里不用写 api
+        target: 'https://monitor-backend.xiaotianxt.com',
+        changeOrigin: true, // 是否跨域
+        rewrite: path => path.replace(/^\/api/, '')
+      }
     }
   },
-
   plugins: [vue(), WindiCSS()]
 })

@@ -2,7 +2,7 @@ import axios from 'axios'
 import { toast } from '@/composables/util'
 
 const service = axios.create({
-  baseURL: import.meta.env.VITE_API_BASE_URL,
+  baseURL: import.meta.env.VITE_APP_BASE_API,
   timeout: 5000
 })
 
@@ -30,13 +30,13 @@ service.interceptors.response.use(
     return response.request.responseType == 'blob' ? response.data : response.data.data
   },
   function (error) {
-    // const msg = error.response.data.msg || '请求失败'
+    const msg = error.response.data.msg || '请求失败'
 
-    // // if (msg == '非法token，请先登录！') {
-    // //   store.dispatch('logout').finally(() => location.reload())
-    // // }
+    if (msg == '非法token，请先登录！') {
+      store.dispatch('logout').finally(() => location.reload())
+    }
 
-    // toast(msg, 'error')
+    toast(msg, 'error')
 
     return Promise.reject(error)
   }

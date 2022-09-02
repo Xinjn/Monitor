@@ -25,7 +25,7 @@
     <div style="height:44px;"></div>
 </template>
 <script setup>
-import { useTabList } from "~/composables/useTabList.js"
+import { useTabList } from '../../composables/useTabList';
 const {
     activeTab,
     tabList,
@@ -33,7 +33,9 @@ const {
     removeTab,
     handleClose
 } = useTabList()
+
 </script>
+
 <style scoped>
 .f-tag-list{
     @apply fixed bg-gray-100 flex items-center px-2;

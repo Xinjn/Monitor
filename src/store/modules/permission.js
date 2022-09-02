@@ -22,7 +22,7 @@ export default {
      */
     filterRoutes(context, menus) {
       const routes = []
-      console.log('私有路由', privateRoutes)
+      // console.log('私有路由', privateRoutes)
       // 路由权限匹配
       menus.forEach(key => {
         // 权限名 与 路由的 name 匹配
