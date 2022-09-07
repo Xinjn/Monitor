@@ -13,7 +13,7 @@ export default defineConfig({
     extensions: ['.js', '.vue', '.ts'] // 优先搜索扩展名
   },
   build: {
-    assetsDir: 'assets'
+    assetsDir: './assets'
   },
   // 反向代理
   devServer: {

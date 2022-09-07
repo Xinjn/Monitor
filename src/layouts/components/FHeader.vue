@@ -5,7 +5,7 @@
             <div class="mr-1">
                 <img src="../../assets/logo.png" alt="" />
             </div>
-            前端监控平台
+            Monitor 前端监控平台
         </span>
         <!-- 面包屑 -->
         <el-icon class="icon-btn" @click="$store.commit('user/setAsideWidth')">

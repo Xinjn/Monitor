@@ -1,0 +1,1 @@
+import{s as r}from"./index.fee0a898.js";function i(){return r.get("/api/error/issues/error-overview")}function o(){return r.get("/api/error/issues/list?page=1&items=20")}function t(e){return r.get(`/api/error/issue/${e}`)}export{o as a,t as b,i as q};
