@@ -12,6 +12,11 @@ export default defineConfig({
     },
     extensions: ['.js', '.vue', '.ts'] // 优先搜索扩展名
   },
+  /**
+   * 在生产中服务时的基本公共路径。
+   * @default '/'
+   */
+  base: './',
   build: {
     assetsDir: './assets'
   },

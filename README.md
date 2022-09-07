@@ -17,9 +17,9 @@
 ## Preview
 
 
-<a href="https://github.com/Xinjn/mall-platform/issues">Report Bug</a>
+<a href="https://github.com/Xinjn/Monitor/issues">Report Bug</a>
 ·
-<a href="https://github.com/Xinjn/mall-platform/issues">Request Feature</a>
+<a href="https://github.com/Xinjn/Monitor/issues">Request Feature</a>
 
 ![img1](./src/assets/img1.jpg)
 ![img2](./src/assets/img2.jpg)
